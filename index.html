@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+            <title>Movie Website</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <style>
+              body
+              {
+                background-color:#f7d58b; 
+                text-transform: capitalize;
+              }
+              a 
+              {
+                color:black;
+                font-weight: bold;
+              }
+              a:hover
+              {
+                 color:red;
+                font-weight: bold;
+              }
+
+            </style>
+            
+    </head>
+<body >
+<div id="movie">
+
+
+
+<div class="container">
+  
+
+  <div class="row">
+    <!-- fetching image from the omdbapi-->
+    <div v-for="movie_detail in movie_title_and_banner">
+        <div class="col-sm-4">
+          <img :src="movie_detail.Poster" width="300" height="350">
+          <p><a href="#about" v-on:click="movie_summary(movie_detail.Title)" >{{movie_detail.Title}}</a></p>
+        </div>
+    </div>
+
+<!-- fetching of newly added movie-->
+      <div class="new_add_movie" v-for="m in movie_img">
+                    <div class="col-sm-4">
+                    <img  :src="m" width="300" height="350">
+                  </div>
+      </div>
+
+
+      <div class="new_add_movie" v-for="d in movie_title">
+                    <div class="col-sm-4">
+                    <p>{{d}}</p>  
+                  </div>
+      </div>
+
+
+  </div>
+
+ 
+<!--summary-section -->
+
+
+<div id="about" >
+
+ 
+  <div class="container">
+      <div v-for="summary in movie_summary_search">
+           <div class="row">
+
+           <div class="col-sm-6"> 
+           <img :src="summary.Poster" width="500px" height="350px">
+         </div>
+          <div class="col-sm-6"> 
+            <h3>Movie Summary  base on the title</h3>
+           <h4>Movie_Title : {{summary.Title}}</h4>
+           <h4>Year : {{summary.Year}}</h4>
+           <h4>Type : {{summary.Type}}</h4>
+         </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<br>
+<!-- form section-->
+
+<div class="container">
+ 
+   <button type="button"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add Image</button>
+
+
+   <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+    
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">Add Image</h4>
+            </div>
+            <div class="modal-body">
+               <form >
+                  <div class="form-group">
+                     <label>Movie Title</label>
+                     <input type="text" class="form-control" v-model="movie_name" placeholder="Movie Title">
+                     <br>
+                      <label>Movie Title:{{movie_name}}</label>
+                  </div>
+                  <div class="form-group">
+                     <label>Image Url:</label>
+                     <input type="text" class="form-control" v-model="movie_banner" placeholder="Movie url">
+                     <br>
+                      <label><img :src="movie_banner" class="img-rounded"  width="304" height="236"> </label>
+                  </div>
+                  <button type="submit" v-on:click="add_movie_name" class="btn btn-primary">Submit</button>
+
+               </form>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+
+
+<!--container-close -->
+</div>
+
+</div>
+
+<script type="text/javascript" src="movie.js"></script>
+<link type="text/css" href="stye.css" rel="stylesheet">
+
+</body>
+</html>
